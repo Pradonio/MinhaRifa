@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifa Victor e Luana</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="firebase.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Rifa Victor e Luana</h1>
+
+        <div id="initial-buttons">
+            <button id="show-signup">Cadastrar</button>
+            <button id="show-login">Login</button>
+        </div>
+
+        <div id="signup-form" class="hidden">
+            <h2>Cadastro</h2>
+            <input type="email" id="signup-email" placeholder="Email" required>
+            <input type="password" id="signup-password" placeholder="Senha" required>
+            <button id="signup-button">Cadastrar</button>
+            <button id="google-signup-button">Cadastrar com Google</button>
+            <button id="back-to-menu-1">Voltar</button>
+        </div>
+
+        <div id="login-form" class="hidden">
+            <h2>Login</h2>
+            <input type="email" id="login-email" placeholder="Email" required>
+            <input type="password" id="login-password" placeholder="Senha" required>
+            <button id="login-button">Login</button>
+            <button id="google-login-button">Login com Google</button>
+            <button id="back-to-menu-2">Voltar</button>
+        </div>
+    </div>
+
+    <script>
+        import { signUpWithEmail, loginWithEmail, loginWithGoogle } from './firebase.js';
+
+// Mostrar formulário de cadastro
+document.getElementById('show-signup').addEventListener('click', function() {
+    document.getElementById('initial-buttons').classList.add('hidden');
+    document.getElementById('signup-form').classList.remove('hidden');
+});
+
+// Mostrar formulário de login
+document.getElementById('show-login').addEventListener('click', function() {
+    document.getElementById('initial-buttons').classList.add('hidden');
+    document.getElementById('login-form').classList.remove('hidden');
+});
+
+// Voltar ao menu inicial a partir do formulário de cadastro
+document.getElementById('back-to-menu-1').addEventListener('click', function() {
+    document.getElementById('signup-form').classList.add('hidden');
+    document.getElementById('initial-buttons').classList.remove('hidden');
+});
+
+// Voltar ao menu inicial a partir do formulário de login
+document.getElementById('back-to-menu-2').addEventListener('click', function() {
+    document.getElementById('login-form').classList.add('hidden');
+    document.getElementById('initial-buttons').classList.remove('hidden');
+});
+
+// Cadastro de novo usuário
+document.getElementById('signup-button').addEventListener('click', function() {
+    const email = document.getElementById('signup-email').value;
+    const password = document.getElementById('signup-password').value;
+    signUpWithEmail(email, password);
+});
+
+// Login de usuário existente
+document.getElementById('login-button').addEventListener('click', function() {
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    loginWithEmail(email, password);
+});
+
+// Login com Google
+document.getElementById('google-signup-button').addEventListener('click', function() {
+    loginWithGoogle();
+});
+
+document.getElementById('google-login-button').addEventListener('click', function() {
+    loginWithGoogle();
+});
+
+    </script>
+</body>
+</html>
